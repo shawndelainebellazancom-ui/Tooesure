@@ -1,32 +1,32 @@
-# MetroTransit Source Code Dump Generator
-# Generates a complete source code dump excluding build artifacts and generated files
+# MetroTransit Complete Source Code Dump Generator
+# Fixed to include wwwroot and .csproj files for Blazor deployment diagnosis
 
 param(
     [string]$ProjectRoot = (Get-Location).Path,
-    [string]$OutputFile = "metro_source_dump.txt"
+    [string]$OutputFile = "metro_complete_dump.txt"
 )
 
-# Directories to exclude
+# Directories to exclude (REMOVED wwwroot - we need it!)
 $excludedDirs = @(
     'bin', 'obj', '.vs', '.idea', '.git', 'node_modules', '.gradle',
     'packages', '.nuget', '.dotnet', 'TestResults', 'coverage', '.publish',
-    'wwwroot', '.next', 'dist', 'build', '__pycache__', '.venv', 'venv',
+    '.next', 'dist', 'build', '__pycache__', '.venv', 'venv',
     '.kotlin', 'captures', '.externalNativeBuild', '.cxx'
 )
 
-# File patterns to exclude
+# File patterns to exclude (REMOVED .png, .jpg, etc from exclusion for now)
 $excludedPatterns = @(
     '*.dll', '*.exe', '*.pdb', '*.cache', '*.user', '*.suo', '*.useros',
     '.DS_Store', 'Thumbs.db', '*.Designer.cs', '*.g.cs',
     '*.AssemblyInfo.cs', '*.AssemblyAttributes.cs', '*.g.kt', '*.generated.*',
-    '*.jar', '*.png', '*.jpg', '*.jpeg', '*.gif', '*.ico', '*.svg',
-    'gradle-wrapper.jar', 'gradle-wrapper.properties'
+    '*.jar', 'gradle-wrapper.jar', 'gradle-wrapper.properties'
 )
 
 # Additional files to exclude by name
 $excludedFiles = @(
     'pmcro_source_dump.txt',
     'metro_source_dump.txt',
+    'metro_complete_dump.txt',
     'PROJECT_TREE.txt',
     'google-services.json',
     'keystore.properties',
@@ -35,11 +35,12 @@ $excludedFiles = @(
     'gradlew.bat'
 )
 
-# File extensions to include (source code only)
+# File extensions to include (ADDED .csproj, .config, .sh, .ps1)
 $includedExtensions = @(
     '.kt', '.java', '.kts', '.md', '.xml', '.json', '.properties',
     '.gradle', '.pro', '.html', '.css', '.js', '.ts', '.toml',
-    '.txt', '.yml', '.yaml', '.razor'
+    '.txt', '.yml', '.yaml', '.razor', '.csproj', '.sln', '.config',
+    '.sh', '.ps1', '.cshtml', '.resx'
 )
 
 function Should-ExcludeDirectory($dirName) {
@@ -102,27 +103,38 @@ function Get-SourceFiles($path) {
 }
 
 # Main execution
-Write-Host "MetroTransit Source Code Dump Generator" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "MetroTransit COMPLETE Source Code Dump Generator" -ForegroundColor Cyan
+Write-Host "=================================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Project Root: $ProjectRoot" -ForegroundColor Yellow
 Write-Host "Output File: $OutputFile" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "IMPORTANT: This version INCLUDES wwwroot, .csproj, and build scripts!" -ForegroundColor Magenta
 Write-Host ""
 Write-Host "Scanning for source files..." -ForegroundColor Green
 
 $sourceFiles = Get-SourceFiles $ProjectRoot | Sort-Object FullName
 
 Write-Host "Found $($sourceFiles.Count) source files" -ForegroundColor Green
+Write-Host ""
+Write-Host "Files by type:" -ForegroundColor Cyan
+$sourceFiles | Group-Object Extension | Sort-Object Count -Descending | ForEach-Object {
+    Write-Host "  $($_.Name): $($_.Count) files" -ForegroundColor Gray
+}
+Write-Host ""
 Write-Host "Generating source dump..." -ForegroundColor Green
 
 # Create output file
 $output = @()
 $output += "=" * 80
-$output += "METROTRANSIT PROJECT SOURCE CODE DUMP"
+$output += "METROTRANSIT PROJECT COMPLETE SOURCE CODE DUMP"
 $output += "Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 $output += "Project Root: $ProjectRoot"
 $output += "Total Files: $($sourceFiles.Count)"
 $output += "=" * 80
+$output += ""
+$output += "INCLUDED DIRECTORIES: wwwroot, source files, configuration"
+$output += "EXCLUDED DIRECTORIES: bin, obj, .vs, .git, node_modules, packages"
 $output += ""
 $output += ""
 
@@ -158,6 +170,20 @@ foreach ($file in $sourceFiles) {
 $output | Out-File -FilePath $OutputFile -Encoding UTF8
 
 Write-Host ""
+Write-Host "=" * 60 -ForegroundColor Green
 Write-Host "Source dump complete!" -ForegroundColor Green
+Write-Host "=" * 60 -ForegroundColor Green
+Write-Host ""
 Write-Host "Output saved to: $OutputFile" -ForegroundColor Yellow
 Write-Host "Total size: $([math]::Round((Get-Item $OutputFile).Length / 1KB, 2)) KB" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "CRITICAL FILES TO VERIFY ARE INCLUDED:" -ForegroundColor Cyan
+Write-Host "  - *.csproj (project configuration)" -ForegroundColor White
+Write-Host "  - Program.cs (application startup)" -ForegroundColor White
+Write-Host "  - wwwroot/index.html (entry point)" -ForegroundColor White
+Write-Host "  - wwwroot/_headers (Cloudflare headers)" -ForegroundColor White
+Write-Host "  - wwwroot/_redirects (Cloudflare redirects)" -ForegroundColor White
+Write-Host "  - wwwroot/service-worker*.js (PWA)" -ForegroundColor White
+Write-Host "  - build.sh or build.ps1 (build script)" -ForegroundColor White
+Write-Host ""
+Write-Host "Now paste this complete dump to Claude for full diagnosis!" -ForegroundColor Magenta

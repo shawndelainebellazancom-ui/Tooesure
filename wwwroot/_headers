@@ -7,6 +7,18 @@
 
 /*.js
   Content-Type: application/javascript
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.br
+  Content-Encoding: br
+
+/*.gz
+  Content-Encoding: gzip
 
 /*
   X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=0, must-revalidate

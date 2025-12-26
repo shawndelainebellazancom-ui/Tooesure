@@ -4,7 +4,6 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	</PropertyGroup>
 
@@ -15,8 +14,8 @@
 
 	<ItemGroup>
 		<Content Update="wwwroot/_redirects" CopyToOutputDirectory="Always" />
+		<Content Update="wwwroot/_headers" CopyToOutputDirectory="Always" />
 		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
 	</ItemGroup>
-
 
 </Project>
