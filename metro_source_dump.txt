@@ -1,14 +1,14 @@
 ================================================================================
 METROTRANSIT PROJECT SOURCE CODE DUMP
-Generated: 2025-12-25 17:56:28
+Generated: 2025-12-25 18:40:23
 Project Root: C:\Users\org.tooensure\Desktop\MetroTransit\website
-Total Files: 12
+Total Files: 9
 ================================================================================
 
 
 ================================================================================
 FILE: _Imports.razor
-SIZE: 0.51 KB
+SIZE: 0.37 KB
 ================================================================================
 
 @using System.Net.Http
@@ -23,117 +23,106 @@ SIZE: 0.51 KB
 @using website.Layout
 
 
-@* Telerik Blazor Namespaces *@
-@using Telerik.Blazor
-@using Telerik.Blazor.Components
-@using Telerik.SvgIcons
-@using Telerik.FontIcons
-
-
 ================================================================================
 FILE: App.razor
-SIZE: 1.39 KB
+SIZE: 1.26 KB
 ================================================================================
 
-<TelerikRootComponent>
-    <Router AppAssembly="@typeof(App).Assembly">
-        <Found Context="routeData">
-            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-        </Found>
-        <NotFound>
-            <PageTitle>Not Found - Tooensure</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%); color: #fff; text-align: center; padding: 2rem;">
-                    <div>
-                        <h1 style="font-size: 4rem; color: #d4a574; margin-bottom: 1rem;">404</h1>
-                        <p style="font-size: 1.5rem; color: #ccc; margin-bottom: 2rem;">Page Not Found</p>
-                        <p style="color: #888; margin-bottom: 2rem;">The page you're looking for doesn't exist or has been moved.</p>
-                        <a href="/" style="display: inline-block; padding: 1rem 2rem; background: #d4a574; color: #000; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.3s;">
-                            Return Home
-                        </a>
-                    </div>
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not Found - Tooensure</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%); color: #fff; text-align: center; padding: 2rem;">
+                <div>
+                    <h1 style="font-size: 4rem; color: #d4a574; margin-bottom: 1rem;">404</h1>
+                    <p style="font-size: 1.5rem; color: #ccc; margin-bottom: 2rem;">Page Not Found</p>
+                    <p style="color: #888; margin-bottom: 2rem;">The page you're looking for doesn't exist or has been moved.</p>
+                    <a href="/" style="display: inline-block; padding: 1rem 2rem; background: #d4a574; color: #000; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.3s;">
+                        Return Home
+                    </a>
                 </div>
-            </LayoutView>
-        </NotFound>
-    </Router>
-</TelerikRootComponent>
+            </div>
+        </LayoutView>
+    </NotFound>
+</Router>
 
 
 ================================================================================
 FILE: Layout\MainLayout.razor
-SIZE: 3.94 KB
+SIZE: 3.62 KB
 ================================================================================
 
 @inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 
-<TelerikRootComponent>
-    <div class="page">
-        <nav class="top-navbar" id="navbar">
-            <div class="nav-container">
-                <NavLink href="/" class="logo">TOOENSURE</NavLink>
-                <button class="mobile-toggle" @onclick="ToggleMobileMenu" aria-label="Toggle navigation" aria-expanded="@mobileMenuOpen">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="nav-menu @(mobileMenuOpen ? "active" : "")" role="navigation">
-                    <li><a href="#home" @onclick="() => CloseMenuAndScroll()">Home</a></li>
-                    <li><a href="#framework" @onclick="() => CloseMenuAndScroll()">PMCR-O</a></li>
-                    <li><a href="#philosophy" @onclick="() => CloseMenuAndScroll()">Philosophy</a></li>
-                    <li><a href="#products" @onclick="() => CloseMenuAndScroll()">Products</a></li>
-                    <li><a href="#founder" @onclick="() => CloseMenuAndScroll()">Founder</a></li>
-                    <li><a href="#contact" @onclick="() => CloseMenuAndScroll()">Contact</a></li>
-                </ul>
+<div class="page">
+    <nav class="top-navbar" id="navbar">
+        <div class="nav-container">
+            <NavLink href="/" class="logo">TOOENSURE</NavLink>
+            <button class="mobile-toggle" @onclick="ToggleMobileMenu" aria-label="Toggle navigation" aria-expanded="@mobileMenuOpen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu @(mobileMenuOpen ? "active" : "")" role="navigation">
+                <li><a href="#home" @onclick="() => CloseMenuAndScroll()">Home</a></li>
+                <li><a href="#framework" @onclick="() => CloseMenuAndScroll()">PMCR-O</a></li>
+                <li><a href="#philosophy" @onclick="() => CloseMenuAndScroll()">Philosophy</a></li>
+                <li><a href="#products" @onclick="() => CloseMenuAndScroll()">Products</a></li>
+                <li><a href="#founder" @onclick="() => CloseMenuAndScroll()">Founder</a></li>
+                <li><a href="#contact" @onclick="() => CloseMenuAndScroll()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        @Body
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>TOOENSURE</h3>
+                <p class="footer-tagline">The Loop That Creates Itself</p>
             </div>
-        </nav>
-
-        <main>
-            @Body
-        </main>
-
-        <footer class="site-footer">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>TOOENSURE</h3>
-                    <p class="footer-tagline">The Loop That Creates Itself</p>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#framework">PMCR-O Framework</a></li>
+                        <li><a href="#philosophy">Philosophy</a></li>
+                        <li><a href="#founder">About Founder</a></li>
+                    </ul>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#framework">PMCR-O Framework</a></li>
-                            <li><a href="#philosophy">Philosophy</a></li>
-                            <li><a href="#founder">About Founder</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Products</h4>
-                        <ul>
-                            <li><a href="#products">Go-To Transit</a></li>
-                            <li><a href="#products">Real Estate Exam</a></li>
-                            <li><a href="#products">Property Recovery</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><NavLink href="/privacy">Privacy Policy</NavLink></li>
-                            <li><a href="#contact">Contact Us</a></li>
-                        </ul>
-                    </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#products">Go-To Transit</a></li>
+                        <li><a href="#products">Real Estate Exam</a></li>
+                        <li><a href="#products">Property Recovery</a></li>
+                    </ul>
                 </div>
-                <div class="footer-bottom">
-                    <p>&copy; @DateTime.Now.Year Tooensure LLC. All rights reserved.</p>
-                    <div class="social-links">
-                        <!-- Add social media icons here if needed -->
-                    </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><NavLink href="/privacy">Privacy Policy</NavLink></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
-</TelerikRootComponent>
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year Tooensure LLC. All rights reserved.</p>
+                <div class="social-links">
+                    <!-- Add social media icons here if needed -->
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
 @code {
     private bool mobileMenuOpen = false;
@@ -146,7 +135,7 @@ SIZE: 3.94 KB
     private async Task CloseMenuAndScroll()
     {
         mobileMenuOpen = false;
-        await Task.Delay(100); // Small delay for smooth animation
+        await Task.Delay(100);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -164,144 +153,6 @@ SIZE: 3.94 KB
         }
     }
 }
-
-
-================================================================================
-FILE: Layout\NavMenu.razor
-SIZE: 1.35 KB
-================================================================================
-
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">website</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
-
-
-
-================================================================================
-FILE: Layout\NavMenu.razor.css
-SIZE: 2.62 KB
-================================================================================
-
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.top-row {
-    min-height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.navbar-brand {
-    font-size: 1.1rem;
-}
-
-.bi {
-    display: inline-block;
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-right: 0.75rem;
-    top: -1px;
-    background-size: cover;
-}
-
-.bi-house-door-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-house-door-fill' viewBox='0 0 16 16'%3E%3Cpath d='M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z'/%3E%3C/svg%3E");
-}
-
-.bi-plus-square-fill-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z'/%3E%3C/svg%3E");
-}
-
-.bi-list-nested-nav-menu {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-list-nested' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E");
-}
-
-.nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
-
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
-
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
-
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.37);
-    color: white;
-}
-
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
-
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
-
-    .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
-
-    .nav-scrollable {
-        /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
-        overflow-y: auto;
-    }
-}
-
 
 
 ================================================================================
@@ -335,7 +186,7 @@ SOFTWARE.
 
 ================================================================================
 FILE: Pages\Home.razor
-SIZE: 9.89 KB
+SIZE: 10.36 KB
 ================================================================================
 
 @page "/"
@@ -519,12 +370,23 @@ SIZE: 9.89 KB
 <section id="contact" class="contact">
     <div class="container">
         <h2 class="fade-in">LET'S BUILD THE FUTURE</h2>
-        <div class="contact-info fade-in">
-            <p><strong>Email:</strong> <a href="mailto:tooensuremaster@gmail.com">tooensuremaster@gmail.com</a></p>
-            <p><strong>Website:</strong> <a href="https://tooensure.com" target="_blank" rel="noopener noreferrer">tooensure.com</a></p>
-            <p><strong>Portfolio:</strong> <a href="https://shawndelainebellazan.com" target="_blank" rel="noopener noreferrer">shawndelainebellazan.com</a></p>
-            <div style="margin-top: 2rem;">
-                <a href="mailto:tooensuremaster@gmail.com" class="btn btn-primary">Start the Conversation</a>
+        <div class="contact-card fade-in">
+            <div class="contact-info-grid">
+                <div class="contact-item">
+                    <span class="contact-label">Email:</span>
+                    <a href="mailto:shawndelainebellazan.com@gmail.com" class="contact-value">shawndelainebellazan.com@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Website:</span>
+                    <a href="https://tooensure.com" target="_blank" rel="noopener noreferrer" class="contact-value">tooensure.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Portfolio:</span>
+                    <a href="https://shawndelainebellazan.com" target="_blank" rel="noopener noreferrer" class="contact-value">shawndelainebellazan.com</a>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <a href="mailto:shawndelainebellazan.com@gmail.com" class="btn btn-primary">Start the Conversation</a>
             </div>
         </div>
     </div>
@@ -546,18 +408,6 @@ SIZE: 9.89 KB
         }
     }
 }
-
-
-================================================================================
-FILE: Pages\NotFound.razor
-SIZE: 0.12 KB
-================================================================================
-
-@page "/not-found"
-@layout MainLayout
-
-<h3>Not Found</h3>
-<p>Sorry, the content you are looking for does not exist.</p>
 
 
 ================================================================================
@@ -787,10 +637,14 @@ SIZE: 0.01 KB
 
 
 ================================================================================
-FILE: telerik-license.txt
-SIZE: 13.86 KB
+FILE: wrangler.toml
+SIZE: 0.1 KB
 ================================================================================
 
-eyJhbGciOiJSUzI1NiIsInR5cCI6IlRlbGVyaWsgTGljZW5zZSBLZXkifQ.eyJ0eXBlIjoidGVsZXJpay1saWNlbnNlIiwibGljZW5zZUlkIjoiZjdjMDJiZjktOWMzYS00NDgzLWI3ZGQtNTIyY2ZiZDZmOTY4IiwidXNlcklkIjoiMGEyNDRlZjQtNmM2Mi00MzhmLThmOGQtYjZlNjUyOWE5M2UyIiwiaWF0IjoxNzY2NDYzNDM0LCJsaWNlbnNlcyI6WyJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVFreEJXazlTSWl3aWRIbHdaU0k2SW5OMVluTmpjbWx3ZEdsdmJpSXNJbVY0Y0dseVlYUnBiMjRpT2pFM056TXlNRFU0TnpRc0luVnpaWEpKWkNJNklqQmhNalEwWldZMExUWmpOakl0TkRNNFppMDRaamhrTFdJMlpUWTFNamxoT1RObE1pSXNJbXhwWTJWdWMyVkpaQ0k2SW1ZM1l6QXlZbVk1TFRsak0yRXRORFE0TXkxaU4yUmtMVFV5TW1ObVltUTJaamsyT0NKOS5BSGFJSE5JQXNJd3NLVGZhWXlxbnRXbVlOUjBYZmdkdDB2czJzZzh2TW9vLTc5M3ZUSFhpRFN4X1VuU0lwMmIwby11OTI3b3A5RlVselZTanlzRkpEVnVxcEhKYTUwX1FyZEgya1FqWmQ3T2NmR2RkNGIxY0VodFR3QVhRUjhvRzk2TEtZTE5lZ2Y0ellHRzBRSThzWko5LUVlZVNZcVBpRFpFM0V4QmM5Z3RFdkVPS1FXTXlEYXdFV1AwbXM2X2p6NURSTkRrNkFITW1GdU02Y1VHWTlFbjV3TklfNnJfM2NQNTFZbHo5a1Q0dV9WZ08zd00wNE9JQUE2Tk5jOW5wLWYwSUxTMWUxalYyM005VnFhaVk1SXR3Y1hzcUYtX1NBRzBCeS1JS0ZRdGEwZHczMElfbGkxYTk5N3AxVnNqaWNFT09GTF9fb1dWemVSNWhkQ3lNRHciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVNrMGlMQ0owZVhCbElqb2ljM1ZpYzJOeWFYQjBhVzl1SWl3aVpYaHdhWEpoZEdsdmJpSTZNVGMzTXpJd05UZzNOQ3dpZFhObGNrbGtJam9pTUdFeU5EUmxaalF0Tm1NMk1pMDBNemhtTFRobU9HUXRZalpsTmpVeU9XRTVNMlV5SWl3aWJHbGpaVzV6WlVsa0lqb2laamRqTURKaVpqa3RPV016WVMwME5EZ3pMV0kzWkdRdE5USXlZMlppWkRabU9UWTRJbjAucnVvNG1UT1JFM2Y2RlJydHFsWXhlZkhDWHFKQjM4amR3RnM0cFdURE43UmsxcC1WS0Q1a2hWdl9VejUzMTBTVFQydWo4cmdWb3VmRGxsVGU4ZWNGNndCN3d1aU1NT09aRzR2SUp5N3IzN2wwMDBqS0NrcjNfczVmWjlheEJiTFktSy1WS1RjMnZLaThqVjlsdmNfejZuY1dhOUVlWVRVN0JPaUY5VFdnYjJrS2FXejBvYmVmUVZTU1lmZVpGY2hYdk14RGRKR0hjQVpCTm9leHhlNGJMWUM4enBPbS1aLWxXNHZSYnJSSjMteU9uZnlWeFhFV0haaGJfVmo0QUpjUDdBU280Sml0T2ZpellxckpZanhHWEdwR3VDbmo4Qy1kc3A5N1MycjlkazNJYXBRNDBnd0ZsOUgtb2JzcVdkc2p1SndCbzQ2WmVjRTl6RmxJSlRaaTJ3IiwiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklsUmxiR1Z5YVdzZ1RHbGpaVzV6WlNCRmRtbGtaVzVqWlNKOS5leUpqYjJSbElqb2lTMFZPUkU5VlNVRk9SMVZNUVZJaUxDSjBlWEJsSWpvaWMzVmljMk55YVhCMGFXOXVJaXdpWlhod2FYSmhkR2x2YmlJNk1UYzNNekl3TlRnM05Dd2lkWE5sY2tsa0lqb2lNR0V5TkRSbFpqUXRObU0yTWkwME16aG1MVGhtT0dRdFlqWmxOalV5T1dFNU0yVXlJaXdpYkdsalpXNXpaVWxrSWpvaVpqZGpNREppWmprdE9XTXpZUzAwTkRnekxXSTNaR1F0TlRJeVkyWmlaRFptT1RZNEluMC5rV1IyUlFub3ZwRjZzUDFYdVBSYXNPTTBuVS1kTEZvVnVGMk5tQS12RC1rRzEzRDl3QVppN2VoWHZGYUJlVVRKa1B5UE9kRjdFMUxyN0huX2l4WlkwUnRZdnNPVVJFME9hc3hnWjNBQWg1b1BBbG5ydmZVNDgtX01BcDNMSnFRX1BuYUwzcnJGcVZGLXhDTWI2VGlVc0ZRMzU4ZlhscUhaUlZweTBNMkVGQmY0OGhyaDJrWlZONERIZTJ2aE16a3YycWFFSVZwa29qZmlKWWJrLXVsa042Q015Zmowbnp4U1NSaXVVZUxBdllhUUNyc3VHWUs1eEd1SXVjRE5Wby1nV0hPLVE2aUV5X3k3TWVWaHQ3b2hGWEtMcHZKSHhhbnZPOG1iNzVoZFVGLUVIOTBna3JMTEF5LXVLR3NNMnVCSmlwOFFtaHFkODR4MFYtbWhBTkhhS2ciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVMwVk9SRTlWU1VOUFRWQk1SVlJGSWl3aWRIbHdaU0k2SW5OMVluTmpjbWx3ZEdsdmJpSXNJbVY0Y0dseVlYUnBiMjRpT2pFM056TXlNRFU0TnpRc0luVnpaWEpKWkNJNklqQmhNalEwWldZMExUWmpOakl0TkRNNFppMDRaamhrTFdJMlpUWTFNamxoT1RObE1pSXNJbXhwWTJWdWMyVkpaQ0k2SW1ZM1l6QXlZbVk1TFRsak0yRXRORFE0TXkxaU4yUmtMVFV5TW1ObVltUTJaamsyT0NKOS50aFVBUElhaWFFTHpwQlFtOHp1b0tuNk1ndTZvU0liX21yUzVKSkx1dEpGRkkyTThFaDJVeW5hNHo2eEVvaGs0cEd2RFlfdVdFMVJ2VjJfSUp3c1RmalljanZieENBdmdUV0ROZnN5dkZiT2ozRjN5TFZJYXlyVmFYZEJNNUF5aGJPX0o0aS1HR2Z5UXZUMnU2Y25md1J1Z1Q1V0pxOTJsTTI5QTFvYnVEYzhRS2lYYk5NWDExSlB3a3EzSUxnUElRWGJYcS15bEdQNEo1LTJIMGhoUURhT2ZmZThnNkJISXl1UjRjU21qVVNRZWY4MG83VmtpcW9zSGtreEs5clhhNkVfYVMzWGltTGJiemxkTmthZ0x2Qmt5ZF9PWUZiQS16UXJXU2NxTk0tWHpiZHB4UW5Wb3dUdWVVSXVWclE5ZWZId3I2TlJ1NS01R3BhSmlyRFhfZlEiLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVMwVk9SRTlWU1UxV1F5SXNJblI1Y0dVaU9pSnpkV0p6WTNKcGNIUnBiMjRpTENKbGVIQnBjbUYwYVc5dUlqb3hOemN6TWpBMU9EYzBMQ0oxYzJWeVNXUWlPaUl3WVRJME5HVm1OQzAyWXpZeUxUUXpPR1l0T0dZNFpDMWlObVUyTlRJNVlUa3paVElpTENKc2FXTmxibk5sU1dRaU9pSm1OMk13TW1KbU9TMDVZek5oTFRRME9ETXRZamRrWkMwMU1qSmpabUprTm1ZNU5qZ2lmUS5mdlN6Q2hyQjZpMWR6SHNXZFF1U0pPT25vOF81YTV0d3h3WFVDVkdrZVZVT0hhSF9ubDdGSUhILXR6LUxaZjB0dW1qR2RWendzVGNwN1I2V0UtemV5ak9xSDRSQ1pFUlNXUm5aTzBoeTh3WFhwbldRR0tPd0pBLXpuYTFTUTFTeERjR1ozM2x2REdBZE1wMGVoVGt1ZlZTVWRwa1V2QUt3QlhHWkVyVXI2SjVGRnJFVnlhWk80OGNIV0VRNTdCLXFobG4wb2RYWHpTMUxGS2pNY2N4TEFoMk80OVBZNnpiUmh6U2Y4UHByMlZpdHRsWjZic0tYMGJXbmwxRVpzMFg0VXREbDhkcHhlaHN2WnhCLUpXeHYtVERXb3ZoajA3OW5iWVVnNHN4cDRBU0JpU0xjdXItdVg5ZXRfTTllZ3k2a1R0aGRLWTA1aDgtNnAtNWdvd3FGWHciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVMwVk9SRTlWU1ZKRlFVTlVJaXdpZEhsd1pTSTZJbk4xWW5OamNtbHdkR2x2YmlJc0ltVjRjR2x5WVhScGIyNGlPakUzTnpNeU1EVTROelFzSW5WelpYSkpaQ0k2SWpCaE1qUTBaV1kwTFRaak5qSXRORE00WmkwNFpqaGtMV0kyWlRZMU1qbGhPVE5sTWlJc0lteHBZMlZ1YzJWSlpDSTZJbVkzWXpBeVltWTVMVGxqTTJFdE5EUTRNeTFpTjJSa0xUVXlNbU5tWW1RMlpqazJPQ0o5LnQ1VWN6N09sdzFPZ2M5T3VtRjM0SkZ6QTBiMUpjbXFvb0piTkR4eWFDNFktdExFcnl6MFAxU2hadFl0bW5nV0h6T3NqeTBzVEhvZmZFWHlDX1l4YzBjQkxydmxqdFFGd21wNE1hYTd2Z2VtOFRPeXpvZUI5N2lSNWJkZERXTnJCcVFDN3BBRXB2YndIWHkwZkFtaHhFendXNWdpeFBwX1g2YXJIR3lmVEVlZHpIVHNzVTl5M0VUWnYtX2M5ZnZCbWF3YV9qRDFTbUFhNjZEbzlHNDNmRHRzem9jc3IzaWdBYVhMMzNyNFloUkR3N3NOYXNiSm1tYzRUNG9PUUFRY3p3ZDAyaDJfMl80dnlBdDhJaUxXVmJWZ1hWZGJ5UnZMUk1PSE1rZXU2TUJ4TzVrSHZSV2RXdW5ZR2FVNVNqQ2ZMRV9JRU0tOGlyZlVZNHVTLWxQQUYyZyIsImV5SmhiR2NpT2lKU1V6STFOaUlzSW5SNWNDSTZJbFJsYkdWeWFXc2dUR2xqWlc1elpTQkZkbWxrWlc1alpTSjkuZXlKamIyUmxJam9pUzBWT1JFOVZTVlpWUlNJc0luUjVjR1VpT2lKemRXSnpZM0pwY0hScGIyNGlMQ0psZUhCcGNtRjBhVzl1SWpveE56Y3pNakExT0RjMExDSjFjMlZ5U1dRaU9pSXdZVEkwTkdWbU5DMDJZell5TFRRek9HWXRPR1k0WkMxaU5tVTJOVEk1WVRrelpUSWlMQ0pzYVdObGJuTmxTV1FpT2lKbU4yTXdNbUptT1MwNVl6TmhMVFEwT0RNdFlqZGtaQzAxTWpKalptSmtObVk1TmpnaWZRLnRqTkpQUG5VM2I1RW1iRkhPa2xRRmhyREdWWmkzOEdOVDJpcXZqT0hGOFl1Mnc3NWYxanB6QUxnTVJXS043Zm9aaUYxYnZ0U3RyQVdUQ1pvQTkxaElTTGVLTy13UlVMbHR4V1NKN1JBNGcxVmliRTVrb2l2OHliTUFJR0NhNE02emI3NklpTF9LWWs3dmxuLWx1NFNmSWtPSDBlaE9KX0dKMDJBaGV6WlhHZElEQm1CWk5Ib09KNFFDejdZdnhueVJ1VVNmWGNobkcycVpyY2xxWERuSngxeDBmZHZteXhFSDZ5dVlXRGFqbmJkZ0VsV3ZiMDhRQ1BnZDVXS01jTE1MYV9oMVo1Q3o3bmRYdkYwVkU3VS1VMzdNTUlscWVPd1R5SHh5ZWt0T0doMHMzY1A5a0EzWmY3a09XcnRnNEp6M0ZqVloxODNlMlBuRmRCZjRKdUoxUSIsImV5SmhiR2NpT2lKU1V6STFOaUlzSW5SNWNDSTZJbFJsYkdWeWFXc2dUR2xqWlc1elpTQkZkbWxrWlc1alpTSjkuZXlKamIyUmxJam9pVFVGVlNTSXNJblI1Y0dVaU9pSnpkV0p6WTNKcGNIUnBiMjRpTENKbGVIQnBjbUYwYVc5dUlqb3hOemN6TWpBMU9EYzBMQ0oxYzJWeVNXUWlPaUl3WVRJME5HVm1OQzAyWXpZeUxUUXpPR1l0T0dZNFpDMWlObVUyTlRJNVlUa3paVElpTENKc2FXTmxibk5sU1dRaU9pSm1OMk13TW1KbU9TMDVZek5oTFRRME9ETXRZamRrWkMwMU1qSmpabUprTm1ZNU5qZ2lmUS5iVVFWRVhNM01JWHlLSkd5TGxVdXpUbDlVanZNR2czTHZ6SmVMQVNGYUNyYVpQSjBVWThLeVBLdGR5NmdKS3lUa2dpanBTTkdDclZuOTNGWTB4TjQwUkEycHA0LXNYam9FVXZqdkVzN25RRllCMGVqb0pyX0VqVTFjYXBYQ1hISVpsbDlkWFlUdXgwbE5OOUI3c1RrbFNFTkxfUTFLWDB4YWcxUVpPZklqSTdhS1hSUEdvZ0RGaTlRUnRFTk1ObjBzRnRNSGY2bkF2Y0FmdlBYeUYzOGdtck83eC1VVEY4LXVqNElVS1NoZU93Y3RYMUd4Zkdncl9adXNsZ1N2VEEtMXNjdVdCSDZGbDdndWdZWm1ERlJlcEowTlZ5dW1tcGwxRW5WYW15SDFaelpta3dBczdGdXVLQU5DdXZiVS1fZkFoTzR3UFZfRXk1R094UWJWVHgybkEiLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVVrTkJTa0ZZSWl3aWRIbHdaU0k2SW5OMVluTmpjbWx3ZEdsdmJpSXNJbVY0Y0dseVlYUnBiMjRpT2pFM056TXlNRFU0TnpRc0luVnpaWEpKWkNJNklqQmhNalEwWldZMExUWmpOakl0TkRNNFppMDRaamhrTFdJMlpUWTFNamxoT1RObE1pSXNJbXhwWTJWdWMyVkpaQ0k2SW1ZM1l6QXlZbVk1TFRsak0yRXRORFE0TXkxaU4yUmtMVFV5TW1ObVltUTJaamsyT0NKOS5nNTBacnNYSGRLZXQzUXpUWFFqTXhMNG5qM2FHTnl3ekgxeWNiR2N2d01TVVA0akpET3pPZXJtTnJtV3Eta0plcUFwVlREYzN4S1Q4LXpHSlNsX2Q0WjFmS0JZN24ydVBsYjl2QnFKVkJHMjM2Zm5TSlNudXQxWTFqVENCeUpUdHJsZG41bXZmX0w5VXptQ2dMYml2aDU0YmUxS0pyM0FaSlJrNlVrck9VaTVMUTJRWU9JWEtpdjdUT3pnbGphel9sTG80WnU4MzdwbV9OTVh6WnpaY1hhUjFHRW1NQXo2RF85YnQzUnVqZEhZT0NZeXN6dUZINmszc0hWeEYza3B0eWc4SkhyTlVUVE44Y0YxRjFiRXkySkVzcWxaNzlQblJDakJETUtuRVJYYTI0TmUwUU56eWRpazMyRGxuNTBERHJzV3ZNSTRqeWVteUlSS09DbWsyMnciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVVrTlhSaUlzSW5SNWNHVWlPaUp6ZFdKelkzSnBjSFJwYjI0aUxDSmxlSEJwY21GMGFXOXVJam94Tnpjek1qQTFPRGMwTENKMWMyVnlTV1FpT2lJd1lUSTBOR1ZtTkMwMll6WXlMVFF6T0dZdE9HWTRaQzFpTm1VMk5USTVZVGt6WlRJaUxDSnNhV05sYm5ObFNXUWlPaUptTjJNd01tSm1PUzA1WXpOaExUUTBPRE10WWpka1pDMDFNakpqWm1Ka05tWTVOamdpZlEuaThfejJsSXNUX1lJbi14ak1BMXJHdEZ0cFlzTVRDNkNrUi1aMTRHMmFuX3oxY2tjYXdEMEpvNkJDWmR3aENmaFZjdVZUenRwNHM5Y1E1eGZneVJXbTQxeTdtMzZQTDR1MDlqSjcyRVFucGstWkxBb0d2N05LbURtckdveEVyNnlqUEh1VDhXcldhLVRoQ2U5am40Y2FkQ0RxZlBBOFN0cUNpbDU0TVl4dmdETG15Yi12RHNWTWgtSlVyT29keDJoRzNDTktLeWhpME9TZm1OdTFVWFdvVkpCSkFKRVBRWHptTFdzOGFnUXRMTmZpRVBiWVE2cmt1LVowYUZ2VXNMS2ZaWE80TVNXdy1pcktzRHA5eXJGOEJQczhXR21QT0ZPTV9hWTdVVlFzbE83X2RMd0c3aFV6WlRvVF95LWdsTE1pRTgzem1Bc1Fqd2ZJSFFXVGZYWkd3IiwiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklsUmxiR1Z5YVdzZ1RHbGpaVzV6WlNCRmRtbGtaVzVqWlNKOS5leUpqYjJSbElqb2lVa05YVUVZaUxDSjBlWEJsSWpvaWMzVmljMk55YVhCMGFXOXVJaXdpWlhod2FYSmhkR2x2YmlJNk1UYzNNekl3TlRnM05Dd2lkWE5sY2tsa0lqb2lNR0V5TkRSbFpqUXRObU0yTWkwME16aG1MVGhtT0dRdFlqWmxOalV5T1dFNU0yVXlJaXdpYkdsalpXNXpaVWxrSWpvaVpqZGpNREppWmprdE9XTXpZUzAwTkRnekxXSTNaR1F0TlRJeVkyWmlaRFptT1RZNEluMC5pVUotalVqeVpGY0NrRk1TU0ZHVlNwMTdlOVk1dWM4TUdzOUE2Q21wR1hXOVljZGdRRWo5cExvZzhEX0I0clhmdVdIQ09HT2tDbW1zMFRQSnRhWFJBUklxdEZTbFdvVjhfUEMtdzkwdGh1ZTRKazVka2pwNnkwQTV4NE9jZVVZVEtjV1pxdmpSYlNERDljdHByWVBMbDR4VTNndDRISGdMMDlkNnA0Q2sxVE9kdHZVSkRzcUtGT1NOSXpGNUVPZUdILVlVc0hJQ1djT05XSEVwT3ZfY3d0UnVIUXkxeURMSzFZT2NsZmlGQmNFZnc5eHB0M2hOQzlraFZBSmo2NjRwQThLZF9LU0V2Z25RMDVkb2UxYjZxYWh2R1RUYk1YbklkS1ZNNXByUW5kZzFQX1dzbjBqMGZxdWJmUG0xdGhxQXVZU0lJYUk0R3hDTzIxN0hRNDhCSmciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVVrVlFUMUpVU1U1SElpd2lkSGx3WlNJNkluTjFZbk5qY21sd2RHbHZiaUlzSW1WNGNHbHlZWFJwYjI0aU9qRTNOek15TURVNE56UXNJblZ6WlhKSlpDSTZJakJoTWpRMFpXWTBMVFpqTmpJdE5ETTRaaTA0Wmpoa0xXSTJaVFkxTWpsaE9UTmxNaUlzSW14cFkyVnVjMlZKWkNJNkltWTNZekF5WW1ZNUxUbGpNMkV0TkRRNE15MWlOMlJrTFRVeU1tTm1ZbVEyWmprMk9DSjkuWU9pbjBuLVVkWnZOZGRLd0VPdmY1NHhoSUlFcFNNbTBWN1Q4T3VSSTM4RXRjcHIxMTFqaGVremxpZUpHSTV3eEdDd040eGVTUUlQUUhiZ1p5N19HWC1UTkVpQjdQZGdoX1lSdUdlQUc0eTk1NjBpR2xJV191TFBPZXdsd0pQRTdqRlRnN0x4WlpPWGRXdEt3ZGhtTGl1VDRBLWpacDVRblJPc2drWjZmRVdtSjJsUThCaWVsRGpxamJIaUxzdzBrSnVrdkxVVkNQa043Q0lPT3EyV2JpUm9NNXpRdEVQNGlHWV9MMERUQmFDUjAxMTFpb0drZ05FMUdmMkd3QkNpRnNreEhiTHAxLTZhS2Ytdmw3Q3JmRkhmRDhvZ1NaLWtSdE90YWpiTEktbXhmQk02TlZzZG9KZFVCWEtkaUV2Q01TRlktcWpJMmFITXdUM1VPc3dmQmRRIiwiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklsUmxiR1Z5YVdzZ1RHbGpaVzV6WlNCRmRtbGtaVzVqWlNKOS5leUpqYjJSbElqb2lVa1ZRVDFKVVUwVlNWa1ZTSWl3aWRIbHdaU0k2SW5OMVluTmpjbWx3ZEdsdmJpSXNJbVY0Y0dseVlYUnBiMjRpT2pFM056TXlNRFU0TnpRc0luVnpaWEpKWkNJNklqQmhNalEwWldZMExUWmpOakl0TkRNNFppMDRaamhrTFdJMlpUWTFNamxoT1RObE1pSXNJbXhwWTJWdWMyVkpaQ0k2SW1ZM1l6QXlZbVk1TFRsak0yRXRORFE0TXkxaU4yUmtMVFV5TW1ObVltUTJaamsyT0NKOS5QakRQdi1GMHo2UzhmYVUyQzJwMU15S0d4d0hON3VLRDdFM09TMnhOSVpPcHBMU3NOVU1OcHh2NE5XUHQ4MHlyVThFbjdWSktrLUJsUkEyVE1lUWpGSUFYcUxESHNEamdVWUlQRE1DT18tdUZpSFdNeExlZmE1QURScEhWdnlXMEdGQUt4TFFtQzZvM0tUZHE5dlF5bGF5dGVhSDN3V3ZUSFFyZ0JtMWVBUHBFenhEWUdXbkdETTVOUHRUTk9PelJYam5kNG8zVThVYk84VzVTekdMejNLTXBIZTdidUN2azZnNkZnWnhGTFlaeVQ0NlNxalJYN2Y1eFZ0YzNOdjVnSUF1M1lMNHFfTm5pOTNvSTY1aHFocVN0QVhiNWlUeE4tR0g3bVVyeDZMNktMTkxtd1Z3Q05pendPTC1hb0lLYmJubjR4LVRjRGU5T0htTGFLQUxkX3ciLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SmpiMlJsSWpvaVZVbEJVMUJEVDFKRklpd2lkSGx3WlNJNkluTjFZbk5qY21sd2RHbHZiaUlzSW1WNGNHbHlZWFJwYjI0aU9qRTNOek15TURVNE56UXNJblZ6WlhKSlpDSTZJakJoTWpRMFpXWTBMVFpqTmpJdE5ETTRaaTA0Wmpoa0xXSTJaVFkxTWpsaE9UTmxNaUlzSW14cFkyVnVjMlZKWkNJNkltWTNZekF5WW1ZNUxUbGpNMkV0TkRRNE15MWlOMlJrTFRVeU1tTm1ZbVEyWmprMk9DSjkuWHcxbkdkRDhfbTVVQkhvWUhmeURFWEV2N05HaFdycnFQZFdDUlhhZjJvS19CUjhjVk1GZHlnaG5IalhIOFpzQmphOG5zSmJHd0ZYQld4RDZXckFkaFllVVczdG45MTIyZXNZTzY0Mk0zOXlncXZoOFFsTXRORWU2OTMzR0FQNF9faXVmbG1lYXg2LXp6RzVqcWxlUUszQzlaVmpkbWh5YzZQU1lydEZrcUhLSU9hRHJReVNiUVBlaFpiR0xhZ1pBVFVfRFhGVnFORzlGalpUYUJvZ29iQmM3OHU4UUdFOHhUU1V2S1JFN09vMU9iYzc1TkxKU0pDSG52TGZMQVZGMEhMaHJuU09fbTFuRzZyUWp5dnBLbFQ3U0tHRW9haXBkajhfdUZEazFzQzZxTlJHczZpS1AxZUt4MUUzbXNxak02WUpmOFNZUjdUT2g0U0VwVVdBdU9BIiwiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklsUmxiR1Z5YVdzZ1RHbGpaVzV6WlNCRmRtbGtaVzVqWlNKOS5leUpqYjJSbElqb2lWMGxPVlVraUxDSjBlWEJsSWpvaWMzVmljMk55YVhCMGFXOXVJaXdpWlhod2FYSmhkR2x2YmlJNk1UYzNNekl3TlRnM05Dd2lkWE5sY2tsa0lqb2lNR0V5TkRSbFpqUXRObU0yTWkwME16aG1MVGhtT0dRdFlqWmxOalV5T1dFNU0yVXlJaXdpYkdsalpXNXpaVWxrSWpvaVpqZGpNREppWmprdE9XTXpZUzAwTkRnekxXSTNaR1F0TlRJeVkyWmlaRFptT1RZNEluMC5kWnYtaDBUbXVoWDdLUnJHZzBlZkRUOHVMU1VrYUJ1bzdxZkpua3g1ZWZORkNQVmNGMDB3ZGQzc1hWSnFsa2k3YVBUZzM3dEVfbUdaelB6MkNQQ3BNWTQ2Y3ppVkZJUVJRd01GMkY3aXBUNzBpQTJ6MzFaTGRTTFZsWGV6Mks1OHlxemFWWE91WkM4d0t3emZmelFjRWU2V2hGVjlqTEE0dVpsX2RnM25jcS1zVzd5SkdjOTF3R1dXSXhwTGFreW9MdU9aNklhNURadkJYV3hkUW1nTlFzM0FzV1pjSlREdS11dzhxQVVZeXpZWXpLT1ktbEN5TncyZ0ZwaGU2MDFKY3NkODQ3R3hCSFRMdkF3dHczeE4wYmVGMzJ4QU5UU3VJWDVTYlpCb3BpSFpfSnN2YWRmWmRqV3FnTUQ2VUd0dnVzNU9BajhoSEt1UFNubFlSZWdJZVEiLCJleUpoYkdjaU9pSlNVekkxTmlJc0luUjVjQ0k2SWxSbGJHVnlhV3NnVEdsalpXNXpaU0JGZG1sa1pXNWpaU0o5LmV5SjBlWEJsSWpvaWRYTmhaMlVpTENKMWMyVnlTV1FpT2lJd1lUSTBOR1ZtTkMwMll6WXlMVFF6T0dZdE9HWTRaQzFpTm1VMk5USTVZVGt6WlRJaUxDSnNhV05sYm5ObFNXUWlPaUptTjJNd01tSm1PUzA1WXpOaExUUTBPRE10WWpka1pDMDFNakpqWm1Ka05tWTVOamdpZlEuendGSy1wWjJmeVBUWjhHcTdZT2Y2WFJXaG5yTDN6SzE0bFI4ZTlRYkJfYkVTWFFuZ3ZoTHI2U3JLTVBzQzdQemE0eXlNZm9leHgydDZpcVJLdzktTUJqeGNLMHM2Q1I2VDhoSU1pZTZOc1NRLXktTlFTMW0xd2FkSzZndDRwRjVBeGg4N2ktYlpBdkZUcHNWM1gzLTRtbnFERkk4YzlRbGE0TVpGZ1djNTZWOUEtSTZsUlphamZNU0JjZE40T1QxLXFQb3o2TW00SVFvQWJfTHBZdmZpRnJCcTNwc1RSOS1Bd0dZWHM5aTFod3lyN0Vtd3FkR2ZFVG1TUWNuVEkzTmlqUXJWZlBBV3FPWllXQ3JFLUlaVGNpQVZGNnpodHVPalNGTE9felBGT184Mm5KX2l0WjFxcDIwaG5YYkpON09BOW9kSmx6ZGd3ZVoyNXBDZDkxdnpnIl0sInByb2R1Y3RzIjpbXSwiYXVkIjoicyoqKipAdCoqKioqKioqKioubyoqKioqKioqKiouY29tIiwibGljZW5zZUhvbGRlciI6InMqKioqQHQqKioqKioqKioqLm8qKioqKioqKioqLmNvbSIsImludGVncml0eSI6Im5ZLzVrODRkUG1sYndISGdBVmlseEJrMFJSRUdRY0J2NmZsc3JNN051UDA9In0.gMzg97Chizz9nK7wgRROqq8irWjOgAXW9n15JKYDyFIhqjmNhnSNOeUJ7_MISfg3puHk5-keADcmvC-MLYei_zJ5eh8mrMqQXAO3EP__TFgvrorfa73o11iSjWZMqiS6WYL7aiMnxn0SSWiLP4auCGlTmCYQaRcdpePXsSSrJFLOYYaHhsXZ3cPEzJTjEq385jVd-8ZCfsYFPqKUq3xNkayGQ-AEbjoQYdZpA3Hu5kAOv9zRByoE6v0Mf0-2Cqn6BWc_09KvrGbwzyDuVUoc6hbsnc-prBqFtfpWeaCvDcTk7wd-hzy6HXqwvcjO9mtx4X7DpHkVOpcUQAd39zTM5Q
+name = "tooensure-website"
+compatibility_date = "2024-12-25"
+
+[site]
+bucket = "./output/wwwroot"
 
 
