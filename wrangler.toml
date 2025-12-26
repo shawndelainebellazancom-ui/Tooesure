@@ -1,4 +1,3 @@
-name = "tooensure-website"
+name = "tooesure"
 compatibility_date = "2025-12-25"
-
 pages_build_output_dir = "output"

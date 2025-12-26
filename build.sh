@@ -28,7 +28,13 @@ fi
 echo "Restoring packages..."
 dotnet restore "$PROJECT_FILE" --configfile nuget.config
 
+echo "Installing wasm-tools..."
+dotnet workload install wasm-tools
+
 echo "Publishing..."
 dotnet publish "$PROJECT_FILE" -c Release -o ./output /p:UseAppHost=false
+
+echo "Cloudflare: remove oversized dotnet.wasm only"
+rm -f ./output/_framework/dotnet.wasm*
 
 echo "Build complete."

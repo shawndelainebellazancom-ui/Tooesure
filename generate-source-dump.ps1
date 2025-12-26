@@ -1,12 +1,13 @@
 # MetroTransit Complete Source Code Dump Generator
-# Fixed to include wwwroot and .csproj files for Blazor deployment diagnosis
+# UPDATED: Force-include critical Blazor/Cloudflare files (wrangler.toml, _headers, _redirects, .csproj)
+# Ensures diagnosis completeness for deployment issues
 
 param(
     [string]$ProjectRoot = (Get-Location).Path,
     [string]$OutputFile = "metro_complete_dump.txt"
 )
 
-# Directories to exclude (REMOVED wwwroot - we need it!)
+# Directories to exclude
 $excludedDirs = @(
     'bin', 'obj', '.vs', '.idea', '.git', 'node_modules', '.gradle',
     'packages', '.nuget', '.dotnet', 'TestResults', 'coverage', '.publish',
@@ -14,7 +15,7 @@ $excludedDirs = @(
     '.kotlin', 'captures', '.externalNativeBuild', '.cxx'
 )
 
-# File patterns to exclude (REMOVED .png, .jpg, etc from exclusion for now)
+# File patterns to exclude (binary/compiled)
 $excludedPatterns = @(
     '*.dll', '*.exe', '*.pdb', '*.cache', '*.user', '*.suo', '*.useros',
     '.DS_Store', 'Thumbs.db', '*.Designer.cs', '*.g.cs',
@@ -22,7 +23,7 @@ $excludedPatterns = @(
     '*.jar', 'gradle-wrapper.jar', 'gradle-wrapper.properties'
 )
 
-# Additional files to exclude by name
+# Additional files to exclude by name (self-referential dumps)
 $excludedFiles = @(
     'pmcro_source_dump.txt',
     'metro_source_dump.txt',
@@ -35,41 +36,56 @@ $excludedFiles = @(
     'gradlew.bat'
 )
 
-# File extensions to include (ADDED .csproj, .config, .sh, .ps1)
+# Expanded extensions to include (added .toml for wrangler)
 $includedExtensions = @(
     '.kt', '.java', '.kts', '.md', '.xml', '.json', '.properties',
-    '.gradle', '.pro', '.html', '.css', '.js', '.ts', '.toml',
+    '.gradle', '.pro', '.html', '.css', '.js', '.ts', '.toml',  # <-- added .toml
     '.txt', '.yml', '.yaml', '.razor', '.csproj', '.sln', '.config',
-    '.sh', '.ps1', '.cshtml', '.resx'
+    '.sh', '.ps1', '.cshtml', '.resx', '.cs'  # <-- added .cs for Program.cs etc.
+)
+# CRITICAL FILES TO FORCE-INCLUDE (use full relative paths)
+$forceIncludePaths = @(
+    'wrangler.toml',
+    'website.csproj',  # Assume name; adjust if different
+    'wwwroot\_headers',
+    'wwwroot\_redirects',
+    'wwwroot\index.html',
+    'Program.cs',
+    'build.sh'
 )
 
-function Should-ExcludeDirectory($dirName) {
-    foreach ($excluded in $excludedDirs) {
-        if ($dirName -eq $excluded) {
-            return $true
-        }
-    }
-    return $false
-}
-
 function Should-ExcludeFile($fileName, $filePath) {
-    # Check excluded file names
+    $relativePath = $filePath.Substring($ProjectRoot.Length + 1).Replace('\', '/')
+
+    # Force-include if matches any critical path exactly
+    if ($forceIncludePaths -contains $relativePath) {
+        return $false
+    } 
+}
+function Should-ExcludeFile($fileName, $filePath) {
+    # Force-include criticals
+    $relativePath = $filePath.Substring($ProjectRoot.Length + 1).Replace('\', '/')
+    if ($forceIncludeFiles | Where-Object { $relativePath -like $_ -or $fileName -like $_ }) {
+        return $false
+    }
+
+    # Explicit excludes
     foreach ($excluded in $excludedFiles) {
         if ($fileName -eq $excluded) {
             return $true
         }
     }
 
-    # Check excluded patterns
     foreach ($pattern in $excludedPatterns) {
         if ($fileName -like $pattern) {
             return $true
         }
     }
 
-    # Check if extension is in included list
+    # Extension filter
     $extension = [System.IO.Path]::GetExtension($fileName).ToLower()
     if ($extension -and -not ($includedExtensions -contains $extension)) {
+        Write-Host "Skipping by extension: $relativePath ($extension)" -ForegroundColor Yellow
         return $true
     }
 
@@ -84,12 +100,10 @@ function Get-SourceFiles($path) {
 
         foreach ($item in $items) {
             if ($item.PSIsContainer) {
-                # It's a directory
                 if (-not (Should-ExcludeDirectory $item.Name)) {
                     $files += Get-SourceFiles $item.FullName
                 }
             } else {
-                # It's a file
                 if (-not (Should-ExcludeFile $item.Name $item.FullName)) {
                     $files += $item
                 }
@@ -103,19 +117,15 @@ function Get-SourceFiles($path) {
 }
 
 # Main execution
-Write-Host "MetroTransit COMPLETE Source Code Dump Generator" -ForegroundColor Cyan
+Write-Host "MetroTransit COMPLETE Source Code Dump Generator (UPDATED)" -ForegroundColor Cyan
 Write-Host "=================================================" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "Project Root: $ProjectRoot" -ForegroundColor Yellow
-Write-Host "Output File: $OutputFile" -ForegroundColor Yellow
-Write-Host ""
-Write-Host "IMPORTANT: This version INCLUDES wwwroot, .csproj, and build scripts!" -ForegroundColor Magenta
-Write-Host ""
-Write-Host "Scanning for source files..." -ForegroundColor Green
+Write-Host "Force-including: wrangler.toml, .csproj, _headers, _redirects, index.html, Program.cs" -ForegroundColor Magenta
 
 $sourceFiles = Get-SourceFiles $ProjectRoot | Sort-Object FullName
 
 Write-Host "Found $($sourceFiles.Count) source files" -ForegroundColor Green
+
+# ... (rest unchanged: progress, output formatting, write to file)
 Write-Host ""
 Write-Host "Files by type:" -ForegroundColor Cyan
 $sourceFiles | Group-Object Extension | Sort-Object Count -Descending | ForEach-Object {
