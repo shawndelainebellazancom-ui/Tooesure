@@ -1,6 +1,21 @@
-﻿<Router AppAssembly="@typeof(App).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+﻿<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
+    <NotFound>
+        <PageTitle>Not Found - Tooensure</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%); color: #fff; text-align: center; padding: 2rem;">
+                <div>
+                    <h1 style="font-size: 4rem; color: #d4a574; margin-bottom: 1rem;">404</h1>
+                    <p style="font-size: 1.5rem; color: #ccc; margin-bottom: 2rem;">Page Not Found</p>
+                    <p style="color: #888; margin-bottom: 2rem;">The page you're looking for doesn't exist or has been moved.</p>
+                    <a href="/" style="display: inline-block; padding: 1rem 2rem; background: #d4a574; color: #000; text-decoration: none; font-weight: 700; border-radius: 4px; transition: all 0.3s;">
+                        Return Home
+                    </a>
+                </div>
+            </div>
+        </LayoutView>
+    </NotFound>
 </Router>

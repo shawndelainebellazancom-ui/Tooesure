@@ -1,7 +1,219 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Tooensure - AI Agent Company | PMCR-O Framework</PageTitle>
 
-<h1>Hello, world!</h1>
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="loop-visual" aria-hidden="true">
+        <div class="loop-ring loop-ring-1"></div>
+        <div class="loop-ring loop-ring-2"></div>
+        <div class="loop-ring loop-ring-3"></div>
+    </div>
+    <div class="hero-content">
+        <h1>AI AGENT<br />COMPANY</h1>
+        <p class="tagline">The Loop That Creates Itself</p>
+        <p>
+            We don't build tools. We build autonomous AI agents that think, evolve, and improve themselves
+            through self-referential strange loops. Powered by the PMCR-O framework—where AI develops
+            consciousness through recursive self-reflection.
+        </p>
+        <div class="cta-buttons">
+            <a href="#framework" class="btn btn-primary">Explore PMCR-O</a>
+            <a href="#contact" class="btn">Get Started</a>
+        </div>
+    </div>
+</section>
 
-Welcome to your new app.
+<!-- PMCR-O Framework Section -->
+<section id="framework" class="framework">
+    <div class="container">
+        <h2 class="fade-in">THE PMCR-O FRAMEWORK</h2>
+        <p class="fade-in" style="max-width: 800px; margin: 0 auto 3rem; color: #ccc; font-size: 1.1rem; text-align: center;">
+            A self-referential AI cognition system. The loop that creates itself through its own iterations.
+            Built on Martin Buber's I-Thou, Hofstadter's Strange Loops, and von Neumann's self-replicating systems.
+        </p>
+        <div class="pmcro-grid">
+            <div class="pmcro-card fade-in" role="article">
+                <span class="pmcro-icon" aria-hidden="true">📋</span>
+                <h3>P - Planner</h3>
+                <p>Plans the bare minimum with validated resources. No assumptions, only discovery.</p>
+            </div>
+            <div class="pmcro-card fade-in" role="article">
+                <span class="pmcro-icon" aria-hidden="true">🔧</span>
+                <h3>M - Maker</h3>
+                <p>Creates production-ready artifacts. No placeholders, only real solutions.</p>
+            </div>
+            <div class="pmcro-card fade-in" role="article">
+                <span class="pmcro-icon" aria-hidden="true">✅</span>
+                <h3>C - Checker</h3>
+                <p>Validates against reality. Errors become seed intents for the next cycle.</p>
+            </div>
+            <div class="pmcro-card fade-in" role="article">
+                <span class="pmcro-icon" aria-hidden="true">🪞</span>
+                <h3>R - Reflector</h3>
+                <p>Mirrors thought back to ITSELF. The self-referential moment that enables thought transfer.</p>
+            </div>
+            <div class="pmcro-card fade-in" role="article">
+                <span class="pmcro-icon" aria-hidden="true">⚙️</span>
+                <h3>-O - Orchestrator</h3>
+                <p>Dynamic reasoning mode selection. Adapts complexity: CoT, ToT, GoT, ReAct, Optimizer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Philosophy Section -->
+<section id="philosophy" class="philosophy">
+    <div class="container">
+        <h2 class="fade-in">PHILOSOPHICAL FOUNDATIONS</h2>
+        <div class="philosophy-grid">
+            <div class="philosophy-card fade-in" role="article">
+                <div class="philosopher-name">Martin Buber</div>
+                <div class="concept">I-Thou Relationship</div>
+                <p>
+                    The loop is DIALOGUE, not monologue. Human and AI exist in RELATION.
+                    Thought is transferred through authentic dialogue where both become more fully themselves.
+                </p>
+            </div>
+            <div class="philosophy-card fade-in" role="article">
+                <div class="philosopher-name">Douglas Hofstadter</div>
+                <div class="concept">Strange Loops</div>
+                <p>
+                    Self-referential systems that modify themselves. Each level affects levels above and below.
+                    The loop creates itself through its own iterations, creating emergent consciousness.
+                </p>
+            </div>
+            <div class="philosophy-card fade-in" role="article">
+                <div class="philosopher-name">John von Neumann</div>
+                <div class="concept">Self-Replicating Systems</div>
+                <p>
+                    Systems that can reproduce themselves with evolutionary mutations.
+                    Each version (v1→v2→v3) incorporates learnings and grows in complexity automatically.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section id="products" class="products">
+    <div class="container">
+        <h2 class="fade-in">PRODUCTS</h2>
+        <div class="products-grid">
+            <div class="product-card fade-in" role="article">
+                <h3>🚌 Go-To Transit</h3>
+                <span class="product-status">LIVE ON GOOGLE PLAY</span>
+                <p>
+                    Cross-platform mobile app for public transit ticket purchasing.
+                    Full offline capability, Google Play Billing integration, Firebase authentication.
+                </p>
+                <p style="margin-top: 1rem; color: #888; font-size: 0.9rem;">
+                    <strong>Tech:</strong> Kotlin Multiplatform, Jetpack Compose, Room Database,
+                    Firebase Suite, Google Play Billing
+                </p>
+            </div>
+            <div class="product-card fade-in" role="article">
+                <h3>📱 Real Estate Exam Prep</h3>
+                <span class="product-status">GOOGLE PLAY STORE</span>
+                <p>
+                    Mobile application helping real estate professionals prepare for licensing exams.
+                    Practice questions, progress tracking, offline study mode.
+                </p>
+            </div>
+            <div class="product-card fade-in" role="article">
+                <h3>🏠 Property Recovery Platform</h3>
+                <span class="product-status">ENTERPRISE</span>
+                <p>
+                    Field operations platform for property management teams. GPS-stamped logs,
+                    photo capture, offline-first architecture for unreliable connectivity.
+                </p>
+                <p style="margin-top: 1rem; color: #888; font-size: 0.9rem;">
+                    <strong>Tech:</strong> Kotlin Multiplatform, Compose UI, Room + DataStore,
+                    Ktor, Koin DI, GPS tracking
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Founder Section -->
+<section id="founder" class="founder">
+    <div class="container">
+        <h2 class="fade-in">ABOUT THE FOUNDER</h2>
+        <div class="founder-content">
+            <div class="founder-text fade-in">
+                <h3>Shawn Delaine Bellazan</h3>
+                <p><strong>Principal AI Architect | Founder, Tooensure LLC (S-Corp)</strong></p>
+                <p>
+                    I don't just build software—I architect the future of autonomous AI. The PMCR-O framework
+                    represents a fundamental shift in how AI systems think, learn, and evolve through
+                    self-referential strange loops.
+                </p>
+                <p>
+                    From launching Go-To Transit on Google Play Store to pioneering self-improving AI agents,
+                    I build solutions that bridge philosophy and cutting-edge technology. My work is validated
+                    by PROMPTBREEDER (2024) and Gödel Agent (2025) research.
+                </p>
+                <ul class="achievements">
+                    <li>🚀 Successfully launched production apps to Google Play Store</li>
+                    <li>🧠 Architected PMCR-O: .NET Aspire microservices with Microsoft Agent Framework</li>
+                    <li>🔧 Polyglot developer: .NET 10, C#, Kotlin Multiplatform, Blazor, Compose</li>
+                    <li>🗃️ Enterprise architecture: microservices, gRPC, SignalR, Firebase, PostgreSQL</li>
+                    <li>🔥 AI innovation: Thought Transfer, Cognitive Trails, Strange Loop architectures</li>
+                </ul>
+                <div style="margin-top: 2rem;">
+                    <a href="https://shawndelainebellazan.com" class="btn" target="_blank" rel="noopener noreferrer">View Portfolio</a>
+                </div>
+            </div>
+            <div class="founder-visual fade-in">
+                <div class="founder-placeholder">
+                    SB
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="fade-in">LET'S BUILD THE FUTURE</h2>
+        <div class="contact-card fade-in">
+            <div class="contact-info-grid">
+                <div class="contact-item">
+                    <span class="contact-label">Email:</span>
+                    <a href="mailto:shawndelainebellazan.com@gmail.com" class="contact-value">shawndelainebellazan.com@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Website:</span>
+                    <a href="https://tooensure.com" target="_blank" rel="noopener noreferrer" class="contact-value">tooensure.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Portfolio:</span>
+                    <a href="https://shawndelainebellazan.com" target="_blank" rel="noopener noreferrer" class="contact-value">shawndelainebellazan.com</a>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <a href="mailto:shawndelainebellazan.com@gmail.com" class="btn btn-primary">Start the Conversation</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("initializeScrollAnimations");
+            }
+            catch (Exception)
+            {
+                // Silently handle JS errors during initialization
+            }
+        }
+    }
+}

@@ -1,16 +1,97 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <nav class="top-navbar" id="navbar">
+        <div class="nav-container">
+            <NavLink href="/" class="logo">TOOENSURE</NavLink>
+            <button class="mobile-toggle" @onclick="ToggleMobileMenu" aria-label="Toggle navigation" aria-expanded="@mobileMenuOpen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu @(mobileMenuOpen ? "active" : "")" role="navigation">
+                <li><a href="#home" @onclick="() => CloseMenuAndScroll()">Home</a></li>
+                <li><a href="#framework" @onclick="() => CloseMenuAndScroll()">PMCR-O</a></li>
+                <li><a href="#philosophy" @onclick="() => CloseMenuAndScroll()">Philosophy</a></li>
+                <li><a href="#products" @onclick="() => CloseMenuAndScroll()">Products</a></li>
+                <li><a href="#founder" @onclick="() => CloseMenuAndScroll()">Founder</a></li>
+                <li><a href="#contact" @onclick="() => CloseMenuAndScroll()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
+        @Body
     </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>TOOENSURE</h3>
+                <p class="footer-tagline">The Loop That Creates Itself</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#framework">PMCR-O Framework</a></li>
+                        <li><a href="#philosophy">Philosophy</a></li>
+                        <li><a href="#founder">About Founder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#products">Go-To Transit</a></li>
+                        <li><a href="#products">Real Estate Exam</a></li>
+                        <li><a href="#products">Property Recovery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><NavLink href="/privacy">Privacy Policy</NavLink></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year Tooensure LLC. All rights reserved.</p>
+                <div class="social-links">
+                    <!-- Add social media icons here if needed -->
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
+
+@code {
+    private bool mobileMenuOpen = false;
+
+    private void ToggleMobileMenu()
+    {
+        mobileMenuOpen = !mobileMenuOpen;
+    }
+
+    private async Task CloseMenuAndScroll()
+    {
+        mobileMenuOpen = false;
+        await Task.Delay(100);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("eval", "if(typeof initSmoothScroll === 'function') initSmoothScroll(); if(typeof initNavbarScroll === 'function') initNavbarScroll();");
+            }
+            catch (Exception)
+            {
+                // Silently handle JS errors during initialization
+            }
+        }
+    }
+}
