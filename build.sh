@@ -35,31 +35,39 @@ cat > nuget.config <<EOF
 </configuration>
 EOF
 
-# 3. BUILD
-PROJECT_FILE=$(ls website/*.csproj | head -n 1)
+# 3. BUILD (FIX: Look in current directory)
+PROJECT_FILE=$(ls *.csproj | head -n 1)
 if [ -z "$PROJECT_FILE" ]; then
-  echo "ERROR: No .csproj file found."
+  echo "ERROR: No .csproj file found in current directory."
+  ls -la # Debug: List files to see what is actually there
   exit 1
 fi
+
+echo "Targeting: $PROJECT_FILE"
 
 echo "Restoring NuGet packages..."
 dotnet restore "$PROJECT_FILE" --configfile nuget.config
 
 echo "Publishing project..."
-# Note: Publish directly to the output folder Cloudflare expects
 dotnet publish "$PROJECT_FILE" -c Release -o output/wwwroot
 
-# 4. CLOUDFLARE CONFIGURATION (The Fix)
+# 4. CLOUDFLARE CONFIGURATION (FIX: Look in current directory)
 echo "Copying Cloudflare configuration files..."
-# Check if files exist in the website root, then copy them
-if [ -f "website/_headers" ]; then
-    cp website/_headers output/wwwroot/_headers
+
+# Check for _headers in current dir
+if [ -f "_headers" ]; then
+    cp _headers output/wwwroot/_headers
     echo "_headers copied."
+else
+    echo "WARNING: _headers file not found in root."
 fi
 
-if [ -f "website/_redirects" ]; then
-    cp website/_redirects output/wwwroot/_redirects
+# Check for _redirects in current dir
+if [ -f "_redirects" ]; then
+    cp _redirects output/wwwroot/_redirects
     echo "_redirects copied."
+else
+    echo "WARNING: _redirects file not found in root."
 fi
 
 echo "Build complete. Output directory: output/wwwroot"

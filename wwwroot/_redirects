@@ -1,9 +1,0 @@
-# Exclude the framework files from redirects
-/_framework/*  /_framework/:splat  200
-
-# Exclude assets
-/css/*         /css/:splat         200
-/images/*      /images/:splat      200
-
-# Redirect everything else to index.html (SPA Routing)
-/*             /index.html         200
