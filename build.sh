@@ -9,15 +9,19 @@ chmod +x dotnet-install.sh
 export DOTNET_ROOT=$(pwd)/dotnet
 export PATH=$DOTNET_ROOT:$PATH
 
-# 2. GENERATE CONFIG MANUALLY
+# 2. GENERATE CONFIG MANUALLY (Safe for Special Characters)
 echo "Generating secure nuget.config..."
 if [ -z "$TELERIK_NUGET_KEY" ]; then
   echo "ERROR: TELERIK_NUGET_KEY environment variable is missing."
+  echo "Please set it in Cloudflare Pages environment variables."
   exit 1
 fi
 
+# XML-escape special characters in the API key
+# This handles &, <, >, ", and ' characters
 ESCAPED_KEY=$(echo "$TELERIK_NUGET_KEY" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&apos;/g')
 
+# Write the XML directly with escaped variable
 cat > nuget.config <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
@@ -35,37 +39,23 @@ cat > nuget.config <<EOF
 </configuration>
 EOF
 
-# 3. INSTALL WASM TOOLS (RESTORED MISSING STEP)
-echo "Installing wasm-tools workload..."
-dotnet workload install wasm-tools
+echo "nuget.config created successfully."
 
-# 4. BUILD
+# 3. VERIFY & BUILD
 PROJECT_FILE=$(ls *.csproj | head -n 1)
 if [ -z "$PROJECT_FILE" ]; then
-  echo "ERROR: No .csproj file found in current directory."
-  ls -la
+  echo "ERROR: No .csproj file found in repository root."
   exit 1
 fi
 
 echo "Targeting: $PROJECT_FILE"
 
+# Restore packages with explicit config file
 echo "Restoring NuGet packages..."
 dotnet restore "$PROJECT_FILE" --configfile nuget.config
 
+# Publish the project to output/wwwroot (matching Cloudflare Pages setting)
 echo "Publishing project..."
-dotnet publish "$PROJECT_FILE" -c Release -o output/wwwroot
-
-# 5. CLOUDFLARE CONFIGURATION
-echo "Copying Cloudflare configuration files..."
-
-if [ -f "_headers" ]; then
-    cp _headers output/wwwroot/_headers
-    echo "_headers copied."
-fi
-
-if [ -f "_redirects" ]; then
-    cp _redirects output/wwwroot/_redirects
-    echo "_redirects copied."
-fi
+dotnet publish "$PROJECT_FILE" -c Release -o output
 
 echo "Build complete. Output directory: output/wwwroot"

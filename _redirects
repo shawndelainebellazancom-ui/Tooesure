@@ -1,2 +1,0 @@
-# Redirect all traffic to index.html so Blazor can handle the routing
-/*  /index.html  200
