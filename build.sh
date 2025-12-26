@@ -29,6 +29,6 @@ echo "Restoring packages..."
 dotnet restore "$PROJECT_FILE" --configfile nuget.config
 
 echo "Publishing..."
-dotnet publish "$PROJECT_FILE" -c Release -o ./output
+dotnet publish "$PROJECT_FILE" -c Release -o ./output /p:UseAppHost=false
 
-echo "Build complete."  
+echo "Build complete."
