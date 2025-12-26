@@ -1,42 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
-    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-	  <WasmEnableHotReload Condition="'$(Configuration)' == 'Debug'">true</WasmEnableHotReload>
-
-  </PropertyGroup>
-
-
-
-	<!-- Performance Optimizations for Release Build -->
-	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<!-- Enable trimming to reduce app size -->
-		<PublishTrimmed>true</PublishTrimmed>
-
-		<!-- Enable AOT compilation for faster runtime -->
-		<RunAOTCompilation>true</RunAOTCompilation>
-
-		<!-- Strip IL after AOT for smaller size -->
-		<WasmStripILAfterAOT>true</WasmStripILAfterAOT>
-
-		<!-- Reduce collation data if not using complex string comparisons -->
-		<BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	</PropertyGroup>
 
 	<ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.1" PrivateAssets="all" />
-    <PackageReference Include="Telerik.FontIcons" Version="4.5.0" />
-    <PackageReference Include="Telerik.SvgIcons" Version="4.5.0" />
-	  <PackageReference Include="Telerik.Licensing" Version="1.6.35" />
-  </ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.1" PrivateAssets="all" />
+		<PackageReference Include="Telerik.UI.for.Blazor" Version="12.2.0" />
+		<PackageReference Include="Telerik.Licensing" Version="1.6.35" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
-  </ItemGroup>
+	<ItemGroup>
+		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+	</ItemGroup>
 
 </Project>
