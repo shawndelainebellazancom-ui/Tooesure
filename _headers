@@ -1,37 +1,51 @@
+# DEFAULT SECURITY HEADERS
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
 
+# JAVASCRIPT (Recursive & Root)
+/**/*.js
+  Content-Type: application/javascript
 /*.js
   Content-Type: application/javascript
 
+# MODULES
+/**/*.mjs
+  Content-Type: application/javascript
 /*.mjs
   Content-Type: application/javascript
 
+# CSS
+/**/*.css
+  Content-Type: text/css
 /*.css
   Content-Type: text/css
 
+# WEBASSEMBLY (Critical for Blazor)
+/**/*.wasm
+  Content-Type: application/wasm
 /*.wasm
   Content-Type: application/wasm
 
+# JSON
+/**/*.json
+  Content-Type: application/json
 /*.json
   Content-Type: application/json
 
-/*.woff
+# FONTS
+/**/*.woff
   Content-Type: application/font-woff
-
-/*.woff2
+/**/*.woff2
   Content-Type: application/font-woff2
 
-/*.png
+# IMAGES
+/**/*.png
   Content-Type: image/png
-
-/*.jpg
+/**/*.jpg
   Content-Type: image/jpeg
-
-/*.ico
+/**/*.ico
   Content-Type: image/x-icon
-
-/*.svg
+/**/*.svg
   Content-Type: image/svg+xml
