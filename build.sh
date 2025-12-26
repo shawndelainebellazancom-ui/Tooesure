@@ -35,11 +35,15 @@ cat > nuget.config <<EOF
 </configuration>
 EOF
 
-# 3. BUILD (FIX: Look in current directory)
+# 3. INSTALL WASM TOOLS (RESTORED MISSING STEP)
+echo "Installing wasm-tools workload..."
+dotnet workload install wasm-tools
+
+# 4. BUILD
 PROJECT_FILE=$(ls *.csproj | head -n 1)
 if [ -z "$PROJECT_FILE" ]; then
   echo "ERROR: No .csproj file found in current directory."
-  ls -la # Debug: List files to see what is actually there
+  ls -la
   exit 1
 fi
 
@@ -51,23 +55,17 @@ dotnet restore "$PROJECT_FILE" --configfile nuget.config
 echo "Publishing project..."
 dotnet publish "$PROJECT_FILE" -c Release -o output/wwwroot
 
-# 4. CLOUDFLARE CONFIGURATION (FIX: Look in current directory)
+# 5. CLOUDFLARE CONFIGURATION
 echo "Copying Cloudflare configuration files..."
 
-# Check for _headers in current dir
 if [ -f "_headers" ]; then
     cp _headers output/wwwroot/_headers
     echo "_headers copied."
-else
-    echo "WARNING: _headers file not found in root."
 fi
 
-# Check for _redirects in current dir
 if [ -f "_redirects" ]; then
     cp _redirects output/wwwroot/_redirects
     echo "_redirects copied."
-else
-    echo "WARNING: _redirects file not found in root."
 fi
 
 echo "Build complete. Output directory: output/wwwroot"
