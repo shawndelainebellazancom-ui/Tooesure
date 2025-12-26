@@ -56,6 +56,6 @@ dotnet restore "$PROJECT_FILE" --configfile nuget.config
 
 # Publish the project to output/wwwroot (matching Cloudflare Pages setting)
 echo "Publishing project..."
-dotnet publish "$PROJECT_FILE" -c Release -o output
+dotnet publish "$PROJECT_FILE" -c Release -o output/wwwroot
 
 echo "Build complete. Output directory: output/wwwroot"
